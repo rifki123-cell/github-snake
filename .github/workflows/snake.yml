@@ -2,23 +2,25 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    - cron: "0 23 * * *"
+    - cron: "0 23 * * *" # tiap malam jam 11
   workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
     steps:
+      # Checkout kode
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Generate Snake SVG
+      # Generate SVG snake
+      - name: Generate Snake
         uses: Platane/snk@master
         with:
           github_user_name: rifki123-cell
-          outputs: |
-            dist/github-contribution-grid-snake.svg
+          svg_out_path: dist/github-contribution-grid-snake.svg
 
+      # Push ke branch `output`
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v3
         with:
